@@ -1,3 +1,9 @@
+# CoinmarketCap Serverless Pipeline
+
+A data engineer build a simple serverless pipeline with Azure services
+
+## Graph Architecture Diagram
+
 ```mermaid
 graph LR
     A[CoinMarketCap API] --> B(Azure Function);
@@ -45,4 +51,10 @@ graph LR
     style B fill:#bbf,stroke:#333,stroke-width:2px
     style E fill:#fbc,stroke:#333,stroke-width:2px
     style G fill:#cfc,stroke:#333,stroke-width:2px
-```
+``` 
+
+### Unecessary services
+
+Based on this project:
+1. ADF
+2. Azure Synapse Analytics
