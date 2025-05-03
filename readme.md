@@ -1,3 +1,4 @@
+```mermaid
 graph LR
     A[CoinMarketCap API] --> B(Azure Function);
     B -- Stores Raw Data (JSON) --> C[Azure Data Lake Storage Gen2 - Raw Zone];
@@ -10,6 +11,9 @@ graph LR
     E -- Serves Data --> H;
     I(Scheduler / Trigger) --> B;
     J(Scheduler / Trigger / ADF) --> E;
+
+
+
 
     subgraph Ingestion
         B
@@ -35,8 +39,10 @@ graph LR
         J
     end
 
+
     style C fill:#f9f,stroke:#333,stroke-width:2px
     style F fill:#ccf,stroke:#333,stroke-width:2px
     style B fill:#bbf,stroke:#333,stroke-width:2px
     style E fill:#fbc,stroke:#333,stroke-width:2px
     style G fill:#cfc,stroke:#333,stroke-width:2px
+```
