@@ -53,8 +53,9 @@ graph LR
     style G fill:#cfc,stroke:#333,stroke-width:2px
 ``` 
 
-### Unecessary services
+### Unnecessary services
 
 Based on this project:
+
 1. ADF
 2. Azure Synapse Analytics
