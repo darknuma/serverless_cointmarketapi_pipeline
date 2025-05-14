@@ -4,10 +4,12 @@ import os
 import requests
 import json
 
-import azure.functions as func
+import azure.functions as func 
 from azure.keyvault.secrets import SecretClient
-from azure.identity import DefaultAzureCredential # Uses Managed Identity for Azure resources
+from azure.identity import DefaultAzureCredential
 from azure.storage.blob import BlobServiceClient
+
+
 
 def main(mytimer: func.TimerRequest) -> None:
     utc_timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
@@ -41,14 +43,6 @@ def main(mytimer: func.TimerRequest) -> None:
         return # Exit if key cannot be retrieved
 
     # --- Call CoinGecko API ---
-    # Example: Get market data for top N coins
-    # Refer to CoinGecko API documentation for more endpoints: https://www.coingecko.com/en/api/documentation
-    # The Pro API base URL is typically: https://pro-api.coingecko.com/api/v3/
-    # Example endpoint: /coins/markets
-    
-    # Construct the URL with the API key as a query parameter
-    # IMPORTANT: Check CoinGecko Pro API documentation for exact parameter naming for API key.
-    # It's often 'x_cg_pro_api_key' for Pro.
     base_url = "https://pro-api.coingecko.com/api/v3"
     endpoint = "/coins/markets"
     
