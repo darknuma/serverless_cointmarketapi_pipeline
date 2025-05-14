@@ -1,12 +1,10 @@
 import azure.functions as func
 import logging
 
-# Import the main function from your other file
-from coin_api_ingeston import main as coin_gecko_timer_main # Renaming for clarity if you have multiple functions
+from coin_api_ingeston import main as coin_gecko_timer_main 
 
 app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION)
 
-# This is your existing HTTP trigger - keep it if you need it
 @app.route(route="http_trigger")
 def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
@@ -38,7 +36,7 @@ def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
 
 @app.timer_trigger(schedule="0 */30 * * * *", # Example: Runs every 30 minutes
                    arg_name="mytimer",        # This must match the argument name in your timer function
-                   run_on_startup=False)      # Set to True if you want it to run when the Function App starts (useful for testing)
+                   run_on_startup=True)      # Set to True if you want it to run when the Function App starts (useful for testing)
 def coingecko_scheduled_ingestion(mytimer: func.TimerRequest) -> None:
     logging.info('Python timer trigger function (coingecko_scheduled_ingestion) is starting.')
     coin_gecko_timer_main(mytimer) # Call the imported main function
