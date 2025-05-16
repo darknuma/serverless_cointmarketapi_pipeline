@@ -3,7 +3,9 @@ import logging
 
 from coin_api_ingeston import main as coin_gecko_timer_main 
 
-app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION)
+# Create Function App with CORS configuration
+app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION, 
+                       cors=func.CorsSettings(allowed_origins=["https://portal.azure.com"]))
 
 @app.route(route="http_trigger")
 def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
@@ -25,15 +27,7 @@ def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
         )
 
 # ---- ADD THIS SECTION FOR YOUR TIMER TRIGGER ----
-# Schedule: Runs every 5 minutes. Adjust the CRON expression as needed.
-# "0 */5 * * * *" -> At minute 0 past every 5th hour.
-# For every 5 minutes: "0 */5 * * * *" is not quite right.
-# Use "*/5 * * * *" for every 5 minutes (Common CRON interpretation)
-# Or "0 */5 * * * *" specifically for Azure Functions (minute 0 of every 5 minute interval)
-# Let's use a common "every 5 minutes" example: "0 */5 * * * *" (meaning at minute 0, 5, 10, 15 etc.)
-# Or for exactly on the 5th minute of every hour: "0 5 * * * *"
-# For "every hour at minute 0": "0 0 * * * *"
-
+# Schedule: Runs every 30 minutes
 @app.timer_trigger(schedule="0 */30 * * * *", # Example: Runs every 30 minutes
                    arg_name="mytimer",        # This must match the argument name in your timer function
                    run_on_startup=True)      # Set to True if you want it to run when the Function App starts (useful for testing)
