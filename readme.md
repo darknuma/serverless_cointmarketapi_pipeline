@@ -53,6 +53,11 @@ graph LR
     style G fill:#cfc,stroke:#333,stroke-width:2px
 ``` 
 
+## Architecture
+
+![Architecture](serverless.drawio.png)
+
+
 ### Unnecessary services
 
 Based on this project:
